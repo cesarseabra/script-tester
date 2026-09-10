@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Script Playground & Tester</title>
-    <meta name="description" content="A modern, lightweight browser-based playground to test, debug, and execute JavaScript scripts online.">
+    <meta name="description"
+        content="A modern, lightweight browser-based playground to test, debug, and execute JavaScript scripts online.">
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <!-- E-goi Web Push SDK -->
     <script type="text/javascript">
         var _egoiwp = _egoiwp || {}; (function () {
-            _egoiwp.url="https://cdn-static-96.dev-egoiapp2.com/";_egoiwp.code="f0e2aa418a67288ef3df4d22419bdd73";
-            const d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];
-            g.type='text/javascript';g.defer=true;g.async=true;g.src=_egoiwp.url+'js/egoiSDK.min.js';
-            s.parentNode.insertBefore(g,s);
+            _egoiwp.url = "https://cdn-static-96.dev-egoiapp2.com/"; _egoiwp.code = "f0e2aa418a67288ef3df4d22419bdd73";
+            const d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript'; g.defer = true; g.async = true; g.src = _egoiwp.url + 'js/egoiSDK.js';
+            s.parentNode.insertBefore(g, s);
         })();
     </script>
 </head>
+
 <body>
     <div class="app-container">
         <!-- Navigation Header -->
@@ -39,7 +44,8 @@
                     <span class="status-dot"></span>
                     <span id="statusText">Ready</span>
                 </div>
-                <a href="https://github.com/cesarseabra/script-tester" target="_blank" rel="noopener" class="btn btn-secondary">
+                <a href="https://github.com/cesarseabra/script-tester" target="_blank" rel="noopener"
+                    class="btn btn-secondary">
                     <i class="fa-brands fa-github"></i> Repository
                 </a>
             </div>
@@ -72,7 +78,8 @@
             <div class="toolbar-group script-loader-group">
                 <div class="input-wrapper">
                     <i class="fa-solid fa-link input-icon"></i>
-                    <input type="url" id="externalScriptUrl" class="form-input" placeholder="Load External Script URL (e.g. ./scripts/sample-async.js)">
+                    <input type="url" id="externalScriptUrl" class="form-input"
+                        placeholder="Load External Script URL (e.g. ./scripts/sample-async.js)">
                 </div>
                 <button id="loadScriptBtn" class="btn btn-secondary" title="Dynamically load external JS file">
                     <i class="fa-solid fa-file-import"></i> Inject Script
@@ -95,7 +102,8 @@
                 </div>
                 <div class="editor-container">
                     <div class="line-numbers" id="lineNumbers">1</div>
-                    <textarea id="codeEditor" class="code-textarea" spellcheck="false" placeholder="// Write or paste your JavaScript script here...&#10;console.log('Hello from Script Tester!');&#10;console.info('Tip: Use console.log(), console.warn(), console.error() to see output on the right!');"></textarea>
+                    <textarea id="codeEditor" class="code-textarea" spellcheck="false"
+                        placeholder="// Write or paste your JavaScript script here...&#10;console.log('Hello from Script Tester!');&#10;console.info('Tip: Use console.log(), console.warn(), console.error() to see output on the right!');"></textarea>
                 </div>
             </section>
 
@@ -153,4 +161,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
