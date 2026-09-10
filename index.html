@@ -15,6 +15,20 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- Service Worker Scope Patch for Subpath Deployments (GitHub Pages) -->
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            const originalRegister = navigator.serviceWorker.register.bind(navigator.serviceWorker);
+            navigator.serviceWorker.register = function (scriptURL, options) {
+                const basePath = window.location.pathname.replace(/[^/]*$/, '');
+                if (options && options.scope === '/' && basePath !== '/') {
+                    console.info(`[ServiceWorker Patch] Adjusting scope from '/' to '${basePath}' for subpath deployment.`);
+                    options = { ...options, scope: basePath };
+                }
+                return originalRegister(scriptURL, options);
+            };
+        }
+    </script>
     <!-- E-goi Web Push SDK -->
     <script type="text/javascript">
         var _egoiwp = _egoiwp || {}; (function () {
