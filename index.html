@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Playground & Tester</title>
+    <meta name="description" content="A modern, lightweight browser-based playground to test, debug, and execute JavaScript scripts online.">
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div class="brand-title">
+                    <h1>Script Tester <span>Playground</span></h1>
+                    <span class="badge">GitHub Pages Ready</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Ready</span>
+                </div>
+                <a href="https://github.com/cesarseabra/script-tester" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i> Repository
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button id="runBtn" class="btn btn-primary" title="Execute script (Ctrl + Enter)">
+                    <i class="fa-solid fa-play"></i> Run Code <span class="shortcut">Ctrl+Enter</span>
+                </button>
+                <button id="clearCodeBtn" class="btn btn-outline" title="Clear Code Editor">
+                    <i class="fa-solid fa-trash-can"></i> Clear Editor
+                </button>
+            </div>
+
+            <div class="toolbar-group">
+                <div class="select-wrapper">
+                    <i class="fa-solid fa-wand-magic-sparkles select-icon"></i>
+                    <select id="snippetSelect" class="form-select">
+                        <option value="" disabled selected>Load Sample Snippet...</option>
+                        <option value="async">Async Fetch & API Request</option>
+                        <option value="dom">DOM Element Manipulation</option>
+                        <option value="benchmark">Performance Benchmark</option>
+                        <option value="api">HTTP Methods & Headers</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="toolbar-group script-loader-group">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-link input-icon"></i>
+                    <input type="url" id="externalScriptUrl" class="form-input" placeholder="Load External Script URL (e.g. ./scripts/sample-async.js)">
+                </div>
+                <button id="loadScriptBtn" class="btn btn-secondary" title="Dynamically load external JS file">
+                    <i class="fa-solid fa-file-import"></i> Inject Script
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <main class="main-content">
+            <!-- Left Side: Code Editor -->
+            <section class="editor-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <h2>JavaScript Code Editor</h2>
+                    </div>
+                    <div class="editor-stats">
+                        <span id="lineCount">1 line</span> | <span id="charCount">0 chars</span>
+                    </div>
+                </div>
+                <div class="editor-container">
+                    <div class="line-numbers" id="lineNumbers">1</div>
+                    <textarea id="codeEditor" class="code-textarea" spellcheck="false" placeholder="// Write or paste your JavaScript script here...&#10;console.log('Hello from Script Tester!');&#10;console.info('Tip: Use console.log(), console.warn(), console.error() to see output on the right!');"></textarea>
+                </div>
+            </section>
+
+            <!-- Right Side: Intercepted Console Output -->
+            <section class="console-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fa-solid fa-terminal"></i>
+                        <h2>Execution Console Output</h2>
+                        <span id="logCounterBadge" class="counter-badge">0</span>
+                    </div>
+                    <div class="console-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="log">Logs</button>
+                        <button class="filter-btn" data-filter="info">Info</button>
+                        <button class="filter-btn" data-filter="warn">Warn</button>
+                        <button class="filter-btn" data-filter="error">Errors</button>
+                    </div>
+                    <div class="console-actions">
+                        <button id="copyConsoleBtn" class="btn-icon" title="Copy Log Content">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                        <button id="downloadConsoleBtn" class="btn-icon" title="Download Logs (.txt)">
+                            <i class="fa-solid fa-download"></i>
+                        </button>
+                        <button id="clearConsoleBtn" class="btn-icon danger" title="Clear Console Output">
+                            <i class="fa-solid fa-ban"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="console-body" id="consoleOutput">
+                    <div class="console-welcome">
+                        <i class="fa-solid fa-terminal welcome-icon"></i>
+                        <p>Console ready. Click <strong>Run Code</strong> or load a script sample to test execution.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Dynamic DOM Test Sandbox Container (Hidden by default, used for DOM manipulation tests) -->
+        <div id="sandboxStage" class="sandbox-stage">
+            <div class="sandbox-header">
+                <span><i class="fa-solid fa-flask"></i> DOM Sandbox Test Output Stage</span>
+                <button id="closeSandboxBtn" class="btn-icon"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="sandboxStageContent" class="sandbox-content"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Script Tester & Playground &bull; Powered by GitHub Pages &bull; Open Source</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
